@@ -19,18 +19,24 @@ class Frame(wx.Frame):
         self.CreateStatusBar(1, wx.ST_SIZEGRIP)
         self.SetStatusText(u'一个简单的邮件群发脚本',0)
 
-        self.EmailName = wx.StaticText(panel,-1,u'帐号',size=(50,-1),style=wx.ALIGN_CENTER)
-        self.EmailPwd = wx.StaticText(panel,-1,u'密码',size=(50,-1),style=wx.ALIGN_CENTER)
-        self.EmailTitle = wx.StaticText(panel,-1,u'邮件标题：',size=(150,20))
-        self.EmailContent = wx.StaticText(panel,-1,u'邮件内容：',size=(150,20))
+        self.EmailName = wx.StaticText(panel,-1,u'帐号',
+            size=(50,-1),style=wx.ALIGN_CENTER)
+        self.EmailPwd = wx.StaticText(panel,-1,u'密码',
+            size=(50,-1),style=wx.ALIGN_CENTER)
+        self.EmailTitle = wx.StaticText(panel,-1,u'邮件标题：',
+            size=(150,20))
+        self.EmailContent = wx.StaticText(panel,-1,u'邮件内容：',
+            size=(150,20))
         self.EmailNameTC = wx.TextCtrl(panel,-1,size=(180,-1))
-        self.EmailPwdTC = wx.TextCtrl(panel,-1,size=(180,-1),style=wx.TE_PASSWORD)
-        self.EmailTitleTC = wx.TextCtrl(panel,-1,size=(600,50),style=wx.TE_MULTILINE)
+        self.EmailPwdTC = wx.TextCtrl(panel,-1,
+            size=(180,-1),style=wx.TE_PASSWORD)
+        self.EmailTitleTC = wx.TextCtrl(panel,-1,
+            size=(600,50),style=wx.TE_MULTILINE)
         self.toEmail = wx.TextCtrl(panel, -1,
-                u"请输入您要群发到的邮箱地址",
                size=(250, 400), style=wx.TE_MULTILINE) #创建一个文本控件
         self.toEmail.SetInsertionPoint(0)
-        self.EmailContentTC = wx.TextCtrl(panel,-1,size=(-1,-1),style=wx.TE_MULTILINE)
+        self.EmailContentTC = wx.TextCtrl(panel,-1,
+            size=(-1,-1),style=wx.TE_MULTILINE)
         self.button1 = wx.Button(panel,-1,u"提交",size=(180,-1))
         self.button2 = wx.Button(panel,-1,u'提交',size=(250,-1))
         self.button3 = wx.Button(panel,-1,u'发送邮件',size=(600,50))
@@ -51,7 +57,8 @@ class Frame(wx.Frame):
         nameSizer.Add(self.EmailNameTC,pos=(0,1))
         nameSizer.Add(self.EmailPwd,pos=(1,0))
         nameSizer.Add(self.EmailPwdTC,pos=(1,1))
-        nameSizer.Add(self.button1,pos=(2,1),flag=wx.ALIGN_RIGHT)
+        nameSizer.Add(self.button1,pos=(2,1),
+            flag=wx.ALIGN_RIGHT)
 #+++++++++++++++++++++box2：目标邮箱栏+++++++++++++++++++++++++++++++++++++++++++++++++++
         box2 = wx.StaticBox(panel,-1,u'您要群发的邮箱')
         box2Sizer = wx.StaticBoxSizer(box2,wx.VERTICAL)
@@ -64,8 +71,6 @@ class Frame(wx.Frame):
         box3.Add(self.EmailContentTC,10,wx.EXPAND,10)
         box3.Add(self.button3)
 
-        #box3Sizer.Add(self.EmailContent)
-        #box3Sizer.Add(self.button3)
         box2Sizer.Add(self.toEmail)
         box2Sizer.Add(self.button2)
         box1Sizer.Add(nameSizer)
