@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 #coding:utf-8
 '''
-@author:  kolaman
-@version:   0.1beta
-@email:   wpf420@gmail.com
-@date:  20140315
-@desc:  使用wxPython写的一个简单的邮件群发工具,测试版暂时只能使用163邮箱进行群发
+@author:   kolaman
+@version:  0.1beta
+@email:    wpf420@gmail.com
+@date:     20140315
+@desc:     使用wxPython写的一个简单的邮件群发工具,测试版暂时只能使用163邮箱进行群发
 '''
 import wx
 import re
@@ -27,15 +27,17 @@ class Frame(wx.Frame):
             size=(150,20))
         self.EmailContent = wx.StaticText(panel,-1,u'邮件内容：',
             size=(150,20))
-        self.EmailNameTC = wx.TextCtrl(panel,-1,size=(180,-1))
+        self.EmailNameTC = wx.TextCtrl(panel,-1,
+            size=(180,-1))
         self.EmailPwdTC = wx.TextCtrl(panel,-1,
             size=(180,-1),style=wx.TE_PASSWORD)
-        self.EmailTitleTC = wx.TextCtrl(panel,-1,
+        self.EmailTitleTC = wx.TextCtrl(panel,-1,'test',
             size=(600,50),style=wx.TE_MULTILINE)
         self.toEmail = wx.TextCtrl(panel, -1,
+            'wpf420@gmail.com',
                size=(250, 400), style=wx.TE_MULTILINE) #创建一个文本控件
         self.toEmail.SetInsertionPoint(0)
-        self.EmailContentTC = wx.TextCtrl(panel,-1,
+        self.EmailContentTC = wx.TextCtrl(panel,-1,'test',
             size=(-1,-1),style=wx.TE_MULTILINE)
         self.button1 = wx.Button(panel,-1,u"提交",size=(180,-1))
         self.button2 = wx.Button(panel,-1,u'提交',size=(250,-1))
@@ -57,14 +59,13 @@ class Frame(wx.Frame):
         nameSizer.Add(self.EmailNameTC,pos=(0,1))
         nameSizer.Add(self.EmailPwd,pos=(1,0))
         nameSizer.Add(self.EmailPwdTC,pos=(1,1))
-        nameSizer.Add(self.button1,pos=(2,1),
-            flag=wx.ALIGN_RIGHT)
+        nameSizer.Add(self.button1,pos=(2,1),flag=wx.ALIGN_RIGHT)
+        #nameSizer.Add(self.toEmail,pos=(2,0),span=(6,2))
 #+++++++++++++++++++++box2：目标邮箱栏+++++++++++++++++++++++++++++++++++++++++++++++++++
         box2 = wx.StaticBox(panel,-1,u'您要群发的邮箱')
         box2Sizer = wx.StaticBoxSizer(box2,wx.VERTICAL)
 #+++++++++++++++++++++box3：内容板块+++++++++++++++++++++++++++++++++++++++++++++++++++++
         box3 = wx.BoxSizer(wx.VERTICAL)
-        #box3Sizer = wx.StaticBoxSizer(box3,wx.VERTICAL)
         box3.Add(self.EmailTitle,0,wx.TOP)
         box3.Add(self.EmailTitleTC,0,wx.SHAPED,10)
         box3.Add(self.EmailContent)
@@ -82,26 +83,26 @@ class Frame(wx.Frame):
         panel.SetSizer(mainSizer)
         mainSizer.Fit(self)
 
-
     def SetMyAccounts(self,evt):
         account = self.EmailNameTC.GetValue()
         pwd = self.EmailPwdTC.GetValue()
         try:
             n = account.index('@')
-            SimpleEmail.Mailuser = account[:n]
+            SimpleEmail.MailUser = account[:n]
+            SimpleEmail.MailPswd = pwd
             SimpleEmail.MailPostfix = account[n+1:]
             SimpleEmail.MailHost = SimpleEmail.MailDic[SimpleEmail.MailPostfix]
             self.SetStatusText(u'一个简单的邮件群发脚本',0)
         except ValueError,e:
             self.SetStatusText(u'请填写正确的邮箱格式',0)
              
-
     def SetAccounts(self,evt):
         account = self.toEmail.GetValue()
         try:
             SimpleEmail.to = account.split()
         except:
             self.SetStatusText(u'请填写正确的邮箱格式',0)
+
     def OnClick(self,evt):
         title = self.EmailTitleTC.GetValue()
         content = self.EmailContentTC.GetValue()
@@ -110,7 +111,6 @@ class Frame(wx.Frame):
             self.SetStatusText(u'邮件发送成功',0)
         except:
             self.SetStatusText(u'发送失败',0)
-
 
 app = wx.App()
 Frame().Show()
