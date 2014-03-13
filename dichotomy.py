@@ -2,7 +2,9 @@
 '''二分法'''
 
 def dichotomy(arr,m,n):
+    #查询所给有序数列介于（m,n）之间部分
     def findlow(arr,m):
+        #查找下界
         if arr[0]>m:
             return 0
         low = 0
@@ -18,6 +20,7 @@ def dichotomy(arr,m,n):
         return mid+1
 
     def findhigh(arr,n):
+        #查找上界
         if arr[-1]<n:
             return len(arr)
         low = 0
