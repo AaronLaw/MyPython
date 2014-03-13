@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding:utf-8
 
+import wx
 import smtplib
 from email.mime.text import MIMEText
 
@@ -22,16 +23,15 @@ def SendMail(to, sub, content):
         s.close()
         return True
     except Exception, e:
-        print str(e)
         return False
         
 def main(sub,content):
-
     if SendMail(to, sub, content):
-        print 'send successful'
+        wx.MessageBox(u"邮件发送成功!", u"消息框",
+            wx.OK | wx.ICON_QUESTION)
     else:
-        print 'send failed'
-    return 0
+        wx.MessageBox(u"发送失败,请重试！", u"消息框",
+            wx.OK | wx.ICON_QUESTION)
 
 if __name__ == '__main__':
     main()

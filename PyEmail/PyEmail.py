@@ -8,8 +8,13 @@
 @desc:     使用wxPython写的一个简单的邮件群发工具,测试版暂时只能使用163邮箱进行群发
 '''
 import wx
+import wx.lib.buttons as buttons
 import re
 import SimpleEmail
+import sys  
+
+reload(sys) 
+sys.setdefaultencoding('utf-8')   
 
 class Frame(wx.Frame):
     def __init__(self):
@@ -35,23 +40,26 @@ class Frame(wx.Frame):
             size=(600,50),style=wx.TE_MULTILINE)
         self.toEmail = wx.TextCtrl(panel, -1,
             'wpf420@gmail.com',
-               size=(250, 400), style=wx.TE_MULTILINE) #创建一个文本控件
-        self.toEmail.SetInsertionPoint(0)
+               size=(250, 400), style=wx.TE_MULTILINE)
         self.EmailContentTC = wx.TextCtrl(panel,-1,'test',
             size=(-1,-1),style=wx.TE_MULTILINE)
-        self.button1 = wx.Button(panel,-1,u"提交",size=(180,-1))
-        self.button2 = wx.Button(panel,-1,u'提交',size=(250,-1))
-        self.button3 = wx.Button(panel,-1,u'发送邮件',size=(600,50))
+        self.EmailTitleTC.SetMaxLength(150)
+        self.EmailContentTC.SetMaxLength(100000)
 
+        self.button1 = buttons.GenButton(panel,-1,u"提交",size=(180,-1))
+        self.button2 = buttons.GenButton(panel,-1,u'提交',size=(250,-1))
+        self.button3 = buttons.GenButton(panel,-1,u'发送邮件',size=(600,50))
+        self.button1.SetUseFocusIndicator(False)
+        self.button2.SetUseFocusIndicator(False)
+        self.button3.SetUseFocusIndicator(False)
         self.Bind(wx.EVT_BUTTON,self.SetMyAccounts,self.button1)
         self.Bind(wx.EVT_BUTTON,self.SetAccounts,self.button2)
         self.Bind(wx.EVT_BUTTON,self.OnClick,self.button3)
 
-
-############# 布局  #####################
+##################### 布局  #####################
         mainSizer = wx.BoxSizer(wx.HORIZONTAL)
         Sizer = wx.BoxSizer(wx.VERTICAL)
-#+++++++++++++++++++++box1:个人信息栏+++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++box1:个人信息栏++++++++++++++++++++++++++++++++++++++++++
         box1 = wx.StaticBox(panel,-1,u'您的邮箱信息')
         box1Sizer = wx.StaticBoxSizer(box1,wx.VERTICAL)
         nameSizer = wx.GridBagSizer(hgap=20,vgap=20)
@@ -60,12 +68,13 @@ class Frame(wx.Frame):
         nameSizer.Add(self.EmailPwd,pos=(1,0))
         nameSizer.Add(self.EmailPwdTC,pos=(1,1))
         nameSizer.Add(self.button1,pos=(2,1),flag=wx.ALIGN_RIGHT)
-        #nameSizer.Add(self.toEmail,pos=(2,0),span=(6,2))
-#+++++++++++++++++++++box2：目标邮箱栏+++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++box2：目标邮箱栏++++++++++++++++++++++++++++++++++++++++++
         box2 = wx.StaticBox(panel,-1,u'您要群发的邮箱')
         box2Sizer = wx.StaticBoxSizer(box2,wx.VERTICAL)
-#+++++++++++++++++++++box3：内容板块+++++++++++++++++++++++++++++++++++++++++++++++++++++
-        box3 = wx.BoxSizer(wx.VERTICAL)
+#+++++++++++++++++++++box3：内容板块++++++++++++++++++++++++++++++++++++++++++++
+        Box3 = wx.StaticBox(panel,-1,u'请输入邮件内容')
+        box3 = wx.StaticBoxSizer(Box3,wx.VERTICAL)
+        #box3 = wx.BoxSizer(wx.VERTICAL)
         box3.Add(self.EmailTitle,0,wx.TOP)
         box3.Add(self.EmailTitleTC,0,wx.SHAPED,10)
         box3.Add(self.EmailContent)
@@ -82,6 +91,7 @@ class Frame(wx.Frame):
         mainSizer.Add(box3,0,wx.EXPAND,10)
         panel.SetSizer(mainSizer)
         mainSizer.Fit(self)
+#####################方法：#####################
 
     def SetMyAccounts(self,evt):
         account = self.EmailNameTC.GetValue()
@@ -104,8 +114,8 @@ class Frame(wx.Frame):
             self.SetStatusText(u'请填写正确的邮箱格式',0)
 
     def OnClick(self,evt):
-        title = self.EmailTitleTC.GetValue()
-        content = self.EmailContentTC.GetValue()
+        title = self.EmailTitleTC.GetValue().encode('utf-8')
+        content = self.EmailContentTC.GetValue().encode('utf-8')
         try:
             SimpleEmail.main(title,content)
             self.SetStatusText(u'邮件发送成功',0)
