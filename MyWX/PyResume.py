@@ -15,10 +15,12 @@ class ResumeFrame(wx.Frame):
         self.scroll = wx.ScrolledWindow(self, -1)
         self.scroll.SetScrollbars(1, 1, -1, 800)
 
-        img = wx.Image('img/im.jpg', type=wx.BITMAP_TYPE_ANY, index=-1)
+        img = wx.Image('img/im.jpg', 
+            type=wx.BITMAP_TYPE_ANY, index=-1)
         imgsb = wx.StaticBitmap(self.scroll, -1,
          wx.BitmapFromImage(img))
-        img2 = wx.Image('img/weixin.png', type=wx.BITMAP_TYPE_ANY, index=-1)
+        img2 = wx.Image('img/weixin.png', 
+            type=wx.BITMAP_TYPE_ANY, index=-1)
         imgsb2 = wx.StaticBitmap(self.scroll, -1,
          wx.BitmapFromImage(img2))
 
