@@ -6,12 +6,15 @@ from email.mime.text import MIMEText
 
 #list of mail address you wana to send
 to = []
-
 #user and password of your mail
-MailHost = ""
+MailHost = "smtp.163.com"
 MailUser = ""
 MailPswd = ""
-MailPostfix = ""
+MailPostfix = "163.com"
+MailDic = {"163.com":"smtp.163.com"}
+
+title = "test"
+content = "这是一封测试邮件"
 
 def SendMail(to, sub, content):
     
@@ -32,15 +35,12 @@ def SendMail(to, sub, content):
         print str(e)
         return False
         
-def main():
-    
-    sub = "Hello,test"
-    content = "这是一封测试邮件"
-    if SendMail(to, sub, content):
+def main(title,content):
+    if SendMail(to, title, content):
         print 'send successful'
     else:
         print 'send failed'
     return 0
 
 if __name__ == '__main__':
-    main()
+    main(title,content)
