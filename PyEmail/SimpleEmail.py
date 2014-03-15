@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding:utf-8
 
+import wx
 import smtplib
 from email.mime.text import MIMEText
 
