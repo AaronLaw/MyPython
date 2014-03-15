@@ -10,6 +10,10 @@
 import wx
 import re
 import SimpleEmail
+import sys  
+
+reload(sys) 
+sys.setdefaultencoding('utf-8')   
 
 class Frame(wx.Frame):
     def __init__(self):
@@ -65,7 +69,9 @@ class Frame(wx.Frame):
         box2 = wx.StaticBox(panel,-1,u'您要群发的邮箱')
         box2Sizer = wx.StaticBoxSizer(box2,wx.VERTICAL)
 #+++++++++++++++++++++box3：内容板块++++++++++++++++++++++++++++++++++++++++++++
-        box3 = wx.BoxSizer(wx.VERTICAL)
+        Box3 = wx.StaticBox(panel,-1,u'请输入邮件内容')
+        box3 = wx.StaticBoxSizer(Box3,wx.VERTICAL)
+        #box3 = wx.BoxSizer(wx.VERTICAL)
         box3.Add(self.EmailTitle,0,wx.TOP)
         box3.Add(self.EmailTitleTC,0,wx.SHAPED,10)
         box3.Add(self.EmailContent)
@@ -105,8 +111,8 @@ class Frame(wx.Frame):
             self.SetStatusText(u'请填写正确的邮箱格式',0)
 
     def OnClick(self,evt):
-        title = self.EmailTitleTC.GetValue()
-        content = self.EmailContentTC.GetValue()
+        title = self.EmailTitleTC.GetValue().encode('utf-8')
+        content = self.EmailContentTC.GetValue().encode('utf-8')
         try:
             SimpleEmail.main(title,content)
             self.SetStatusText(u'邮件发送成功',0)
