@@ -56,7 +56,6 @@ class Frame(wx.Frame):
         self.Bind(wx.EVT_BUTTON,self.SetAccounts,self.button2)
         self.Bind(wx.EVT_BUTTON,self.OnClick,self.button3)
 
-
 ##################### 布局  #####################
         mainSizer = wx.BoxSizer(wx.HORIZONTAL)
         Sizer = wx.BoxSizer(wx.VERTICAL)
