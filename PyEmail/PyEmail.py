@@ -45,17 +45,13 @@ class Frame(wx.Frame):
             size=(-1,-1),style=wx.TE_MULTILINE)
         self.EmailTitleTC.SetMaxLength(150)
         self.EmailContentTC.SetMaxLength(100000)
-        self.button1 = wx.Button(panel,-1,u"提交",size=(180,-1))
-        self.button2 = wx.Button(panel,-1,u'提交',size=(250,-1))
-        self.button3 = wx.Button(panel,-1,u'发送邮件',size=(600,50))
-        
+
         self.button1 = buttons.GenButton(panel,-1,u"提交",size=(180,-1))
         self.button2 = buttons.GenButton(panel,-1,u'提交',size=(250,-1))
         self.button3 = buttons.GenButton(panel,-1,u'发送邮件',size=(600,50))
         self.button1.SetUseFocusIndicator(False)
         self.button2.SetUseFocusIndicator(False)
         self.button3.SetUseFocusIndicator(False)
-
         self.Bind(wx.EVT_BUTTON,self.SetMyAccounts,self.button1)
         self.Bind(wx.EVT_BUTTON,self.SetAccounts,self.button2)
         self.Bind(wx.EVT_BUTTON,self.OnClick,self.button3)
