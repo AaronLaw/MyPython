@@ -40,10 +40,10 @@ class Frame(wx.Frame):
         self.toEmail = wx.TextCtrl(panel, -1,
             'wpf420@gmail.com',
                size=(250, 400), style=wx.TE_MULTILINE)
-        self.toEmail.SetInsertionPoint(0)
         self.EmailContentTC = wx.TextCtrl(panel,-1,'test',
             size=(-1,-1),style=wx.TE_MULTILINE)
         self.EmailTitleTC.SetMaxLength(150)
+        self.EmailContentTC.SetMaxLength(100000)
         self.button1 = wx.Button(panel,-1,u"提交",size=(180,-1))
         self.button2 = wx.Button(panel,-1,u'提交',size=(250,-1))
         self.button3 = wx.Button(panel,-1,u'发送邮件',size=(600,50))
