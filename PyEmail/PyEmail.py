@@ -8,6 +8,7 @@
 @desc:     使用wxPython写的一个简单的邮件群发工具,测试版暂时只能使用163邮箱进行群发
 '''
 import wx
+import wx.lib.buttons as buttons
 import re
 import SimpleEmail
 import sys  
@@ -47,6 +48,13 @@ class Frame(wx.Frame):
         self.button1 = wx.Button(panel,-1,u"提交",size=(180,-1))
         self.button2 = wx.Button(panel,-1,u'提交',size=(250,-1))
         self.button3 = wx.Button(panel,-1,u'发送邮件',size=(600,50))
+        
+        self.button1 = buttons.GenButton(panel,-1,u"提交",size=(180,-1))
+        self.button2 = buttons.GenButton(panel,-1,u'提交',size=(250,-1))
+        self.button3 = buttons.GenButton(panel,-1,u'发送邮件',size=(600,50))
+        self.button1.SetUseFocusIndicator(False)
+        self.button2.SetUseFocusIndicator(False)
+        self.button3.SetUseFocusIndicator(False)
 
         self.Bind(wx.EVT_BUTTON,self.SetMyAccounts,self.button1)
         self.Bind(wx.EVT_BUTTON,self.SetAccounts,self.button2)
