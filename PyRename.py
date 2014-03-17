@@ -70,6 +70,7 @@ class Frame(wx.Frame):
 ############################################################
 
     def OpenFile(self,evt):
+        #取得所在文件目录
         dialog = wx.DirDialog(None, u'选择所在文件目录',
           style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
         if dialog.ShowModal() == wx.ID_OK:
@@ -79,15 +80,18 @@ class Frame(wx.Frame):
         dialog.Destroy()
     
     def FindFile(self,evt):
+        #查询文件
         self.OldText = self.OldName.GetValue().decode('utf-8')
         self.cmd.SetValue(self.OldText)
     
     def ModFile(self,evt):
+        #执行替换方法
         self.NewText = self.NewName.GetValue().decode('utf-8')
         self.run(self.FilePath,self.OldText,self.NewText)
         self.cmd.SetValue(self.NewText+"\n\r文件名称修改完毕")
 
     def run(self,filepath,oldname,newname):
+        #查询和替换的具体方法
         l = os.listdir(filepath)
         for i in l:
             name = os.path.splitext(i)[0]
