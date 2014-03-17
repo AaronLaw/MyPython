@@ -40,6 +40,13 @@ class Frame(wx.Frame):
         self.Bind(wx.EVT_BUTTON,self.ModFile,self.ModButton)
 
         self.cmd = wx.TextCtrl(panel, -1,
+            u'''
+            使用步骤：
+            1.选择所在文件目录;
+            2.输入需要批量修改的文件名并提交;
+            3.输入变更后的文件名;
+            4.提交进行批量修改。    
+            ''',
             size=(330, 200), style=wx.TE_MULTILINE) 
         self.FilePath = ''
         self.OldText = ''
@@ -74,33 +81,42 @@ class Frame(wx.Frame):
         dialog = wx.DirDialog(None, u'选择所在文件目录',
           style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
         if dialog.ShowModal() == wx.ID_OK:
-            FilePath1 = dialog.GetPath()
             self.FilePath = dialog.GetPath()
-            self.Open.SetValue(FilePath1)
+            self.Open.SetValue(self.FilePath)
+            self.cmd.SetValue(u'您所选择的文件夹目录是：'+self.FilePath)
         dialog.Destroy()
     
-    def FindFile(self,evt):
+    def FindFile(self,evt): 
         #查询文件
         self.OldText = self.OldName.GetValue().decode('utf-8')
-        self.cmd.SetValue(self.OldText)
+        if self.OldText:
+            self.cmd.SetValue(u'您所希望更改的文件名称是：'+self.OldText)
+        else:
+            self.cmd.SetValue(u'请输入您所希望修改的文件名')
     
     def ModFile(self,evt):
-        #执行替换方法
-        self.NewText = self.NewName.GetValue().decode('utf-8')
-        self.run(self.FilePath,self.OldText,self.NewText)
-        self.cmd.SetValue(self.NewText+"\n\r文件名称修改完毕")
-
+        #替换文件
+        if self.OldText and self.FilePath:
+            self.NewText = self.NewName.GetValue().decode('utf-8')
+            self.run(self.FilePath,self.OldText,self.NewText)
+            self.cmd.SetValue(u"修改完毕,已经将文件名称中的 \""+self.OldText+"\" 部分修改为 \""+self.NewText+"\"")
+        else:
+            self.cmd.SetValue(u'请先选择文件夹目录\n\r并且输入您所希望修改的文件名\n\r后再提交修改')
+    
     def run(self,filepath,oldname,newname):
-        #查询和替换的具体方法
-        l = os.listdir(filepath)
-        for i in l:
-            name = os.path.splitext(i)[0]
-            if name.find(oldname) > -1:
-                length = len(oldname)
-                inx = name.index(oldname)
-                theoldname = filepath+'\\'+i
-                thenewname = filepath+'\\'+name[:inx]+newname+name[inx+length:]+os.path.splitext(i)[1]
-                os.rename(theoldname,thenewname)
+        #查询和替换的方法
+        try:
+            l = os.listdir(filepath)
+            for i in l:
+                name = os.path.splitext(i)[0]
+                if name.find(oldname) > -1:
+                    length = len(oldname)
+                    inx = name.index(oldname)
+                    theoldname = filepath+'\\'+i
+                    thenewname = filepath+'\\'+name[:inx]+newname+name[inx+length:]+os.path.splitext(i)[1]
+                    os.rename(theoldname,thenewname)
+        except Exception:
+            self.cmd.SetValue(u"修改失败")
             
 app = wx.App()
 Frame().Show()
