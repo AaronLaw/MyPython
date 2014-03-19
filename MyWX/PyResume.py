@@ -50,13 +50,13 @@ class ResumeFrame(wx.Frame):
             'xxxxx',size=(150,-1))
 
         self.introTC = wx.TextCtrl(self.scroll,-1,
-            u'',size=(500,50),style=wx.TE_MULTILINE)
+            u'',size=(800,100),style=wx.TE_MULTILINE)
         self.experienceTC = wx.TextCtrl(self.scroll,-1,
-            u'',size=(500,50),style=wx.TE_MULTILINE)
+            u'',size=(800,100),style=wx.TE_MULTILINE)
         self.skillTC = wx.TextCtrl(self.scroll,-1,
-            u'',size=(500,50),style=wx.TE_MULTILINE)
+            u'',size=(800,100),style=wx.TE_MULTILINE)
         self.snsTC = wx.TextCtrl(self.scroll,-1,
-            u'',size=(500,50),style=wx.TE_MULTILINE)
+            u'',size=(800,100),style=wx.TE_MULTILINE)
 
         mainSizer = wx.BoxSizer(wx.VERTICAL)
         Sizer1 = wx.BoxSizer(wx.HORIZONTAL)
