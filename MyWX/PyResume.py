@@ -15,8 +15,12 @@ class ResumeFrame(wx.Frame):
         self.scroll = wx.ScrolledWindow(self, -1)
         self.scroll.SetScrollbars(1, 1, -1, 800)
 
-        img = wx.Image('im.jpg', type=wx.BITMAP_TYPE_ANY, index=-1)
-        imgsb = wx.StaticBitmap(self.scroll, -1, wx.BitmapFromImage(img))
+        img = wx.Image('img/im.jpg', type=wx.BITMAP_TYPE_ANY, index=-1)
+        imgsb = wx.StaticBitmap(self.scroll, -1,
+         wx.BitmapFromImage(img))
+        img2 = wx.Image('img/weixin.png', type=wx.BITMAP_TYPE_ANY, index=-1)
+        imgsb2 = wx.StaticBitmap(self.scroll, -1,
+         wx.BitmapFromImage(img2))
 
         title = wx.StaticText(self.scroll,-1,u"我的wxPython简历")
         title.SetFont(wx.Font(18, wx.SWISS, wx.NORMAL, wx.BOLD))
@@ -32,17 +36,27 @@ class ResumeFrame(wx.Frame):
         skill = wx.StaticText(self.scroll,-1,u'技能：')
         sns = wx.StaticText(self.scroll,-1,u'社交网络&github：')
 
-        self.nameTC = wx.TextCtrl(self.scroll,-1,u'your name',size=(150,-1))
-        self.telTC = wx.TextCtrl(self.scroll,-1,u'186***********',size=(150,-1))
-        self.emailTC = wx.TextCtrl(self.scroll,-1,u'wpf420@gmail.com',size=(150,-1))
-        self.eduTC = wx.TextCtrl(self.scroll,-1,u'大学本科',size=(150,-1))
-        self.universityTC = wx.TextCtrl(self.scroll,-1,'xxx university',size=(150,-1))
-        self.majorTC = wx.TextCtrl(self.scroll,-1,'xxxxx',size=(150,-1))
+        self.nameTC = wx.TextCtrl(self.scroll,-1,
+            u'your name',size=(150,-1))
+        self.telTC = wx.TextCtrl(self.scroll,-1,
+            u'186***********',size=(150,-1))
+        self.emailTC = wx.TextCtrl(self.scroll,-1,
+            u'wpf420@gmail.com',size=(150,-1))
+        self.eduTC = wx.TextCtrl(self.scroll,-1,
+            u'大学本科',size=(150,-1))
+        self.universityTC = wx.TextCtrl(self.scroll,-1,
+            'xxx university',size=(150,-1))
+        self.majorTC = wx.TextCtrl(self.scroll,-1,
+            'xxxxx',size=(150,-1))
 
-        self.introTC = wx.TextCtrl(self.scroll,-1,u'',size=(500,50),style=wx.TE_MULTILINE)
-        self.experienceTC = wx.TextCtrl(self.scroll,-1,u'',size=(500,50),style=wx.TE_MULTILINE)
-        self.skillTC = wx.TextCtrl(self.scroll,-1,u'',size=(500,50),style=wx.TE_MULTILINE)
-        self.snsTC = wx.TextCtrl(self.scroll,-1,u'',size=(500,50),style=wx.TE_MULTILINE)
+        self.introTC = wx.TextCtrl(self.scroll,-1,
+            u'',size=(500,50),style=wx.TE_MULTILINE)
+        self.experienceTC = wx.TextCtrl(self.scroll,-1,
+            u'',size=(500,50),style=wx.TE_MULTILINE)
+        self.skillTC = wx.TextCtrl(self.scroll,-1,
+            u'',size=(500,50),style=wx.TE_MULTILINE)
+        self.snsTC = wx.TextCtrl(self.scroll,-1,
+            u'',size=(500,50),style=wx.TE_MULTILINE)
 
         mainSizer = wx.BoxSizer(wx.VERTICAL)
         Sizer1 = wx.BoxSizer(wx.HORIZONTAL)
@@ -86,7 +100,7 @@ class ResumeFrame(wx.Frame):
         mainSizer.Add(Sizer2,0,wx.ALL,5)
         self.scroll.SetSizer(mainSizer)
         mainSizer.Fit(self)
-        #mainSizer.SetSizeHints(self)
+
 
 app = wx.App()
 ResumeFrame().Show()
