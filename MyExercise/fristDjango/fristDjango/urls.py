@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'fristDjango.views.home', name='home'),
+    url(r'^$', 'fristDjango.views.home', name='home'),
     # url(r'^fristDjango/', include('fristDjango.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
