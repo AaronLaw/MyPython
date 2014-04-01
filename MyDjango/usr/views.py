@@ -1,3 +1,7 @@
+#coding:utf-8
+from django.shortcuts import render_to_response,render,get_object_or_404  
+from django.http import HttpResponse, HttpResponseRedirect,Http404  
+from models import MyBlog
 from django.contrib.auth.models import User  
 from django.contrib import auth
 from django.contrib import messages
